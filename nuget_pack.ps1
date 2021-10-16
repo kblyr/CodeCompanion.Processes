@@ -1,0 +1,1 @@
+dotnet pack src/Processes --configuration Release --output ../.nuget_releases/
