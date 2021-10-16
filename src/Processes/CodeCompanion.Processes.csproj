@@ -7,7 +7,7 @@
 
     <!-- NuGet Package Info -->
     <PackageId>CodeCompanion.Processes</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>John Josua Paderon</Authors>
     <Company>CodeCompanion Libraries</Company>
     <Copyright>Copyright 2021 (c) John Josua Paderon</Copyright>
@@ -15,6 +15,9 @@
     <RepositoryUrl>https://github.com/kblyr/CodeCompanion.Processes</RepositoryUrl>
     <Description>CodeCompanion.Processes</Description>
     <PackageIconUrl>https://raw.githubusercontent.com/kblyr/CodeCompanion.Processes/main/assets/logo.png</PackageIconUrl>
+    <PackageReleaseNotes>
+      Added IProcessContext
+    </PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
