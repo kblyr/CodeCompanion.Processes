@@ -6,7 +6,7 @@ namespace CodeCompanion.Processes
     {
         public Type ExpectedType { get; }
 
-        public InvalidProcessContextException(Type expectedType)
+        public InvalidProcessContextException(Type expectedType) : base($"Expecting an instance of '{expectedType.FullName}'")
         {
             ExpectedType = expectedType;
         }
