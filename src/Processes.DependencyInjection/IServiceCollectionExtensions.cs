@@ -1,21 +1,28 @@
 using System.Reflection;
-using CodeCompanion.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CodeCompanion.Processes
 {
     public static class IServiceCollectionExtensions
     {
-        public static IServiceCollection AddProcessImplementations(this IServiceCollection services, Assembly containingAssembly, ServiceLifetime lifetime = ServiceLifetime.Transient)
-        {
-            var implementations = containingAssembly.GetTypes().Where(type => type.IsConcreteImplementationOf(typeof(IAsyncProcess<,>)));
+        private static IEnumerable<Type> GetSpecificImplemenetationTypes(Assembly containingAssembly, params Type[] genericInterfaceTypes) => containingAssembly.GetTypes()
+            .Where(type =>
+                !type.IsGenericTypeDefinition &&
+                !type.ContainsGenericParameters &&
+                type.GetInterfaces().Any(interfaceType => genericInterfaceTypes.Contains(interfaceType.GetGenericTypeDefinition()))
+            );
 
-            if (implementations.Any())
+        private static IServiceCollection AddImplementation(this IServiceCollection services, Type implementation, ServiceLifetime lifetime = ServiceLifetime.Transient)
+        {
+            services.Add(new ServiceDescriptor(implementation, implementation, lifetime));
+            return services;
+        }
+
+        public static IServiceCollection AddProcesses(this IServiceCollection services, Assembly containingAssembly, ServiceLifetime lifetime = ServiceLifetime.Transient)
+        {
+            foreach (var processType in GetSpecificImplemenetationTypes(containingAssembly, typeof(IProcess<,>), typeof(IAsyncProcess<,>)))
             {
-                foreach (var implementation in implementations)
-                {
-                    services.Add(new ServiceDescriptor(implementation, implementation, lifetime));
-                }
+                services.AddImplementation(processType, lifetime);
             }
 
             return services;
