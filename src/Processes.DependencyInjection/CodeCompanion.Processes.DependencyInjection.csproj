@@ -18,7 +18,7 @@
       This library injects CodeCompanion.Processes to the IOC container
     </Description>
     <PackageIconUrl>https://raw.githubusercontent.com/kblyr/CodeCompanion.Processes/main/assets/logo.png</PackageIconUrl>
-    <PackageReleaseNotes>https://github.com/kblyr/CodeCompanion.Processes/releases/tag/v1.1.0</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/kblyr/CodeCompanion.Processes/releases/tag/v1.1.1</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
