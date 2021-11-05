@@ -9,7 +9,7 @@ namespace CodeCompanion.Processes
             .Where(type =>
                 !type.IsGenericTypeDefinition &&
                 !type.ContainsGenericParameters &&
-                type.GetInterfaces().Any(interfaceType => genericInterfaceTypes.Contains(interfaceType.GetGenericTypeDefinition()))
+                type.GetInterfaces().Any(interfaceType => genericInterfaceTypes.Contains(interfaceType.IsGenericTypeDefinition ? interfaceType.GetGenericTypeDefinition() : interfaceType))
             );
 
         private static IServiceCollection AddImplementation(this IServiceCollection services, Type implementation, ServiceLifetime lifetime = ServiceLifetime.Transient)
